@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if participants %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for participant in participants %}
+        <tr>
+            <td>{{ participant.id }}</td>
+            <td>{{ participant.name }}</td>
+            <td>
+                <a href="{{ url_for('participants.edit_participant', id = participant.id) }}" class="btn btn-primary" >
+                    Edit
+                </a> 
+                 <a href="{{ url_for('participants.delete_participant', id = participant.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this participant?')">
+                    Delete
+                </a> 
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                <a href="{{ url_for('participants.add_participant')}}">Add Participant</a>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+{% else %}
+
+    <p>No participants yet. <a href="{{ url_for('participants.add_participant') }}">Add one!</a></p>
+
+{% endif %}
+
+{% endblock %}

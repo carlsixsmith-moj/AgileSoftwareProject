@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Add a new participant</h2>
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="id" class="form-label">Id</label>
+            <input type="text" id="id" name="id" class="form-control" value="{{ form_id or '' }}" required maxlength="9" minlength="9" />
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Participant Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ form_name or '' }}" required maxlength="50"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+{% endblock %}
