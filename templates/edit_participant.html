@@ -10,7 +10,7 @@
     </div>
     {% endif %}
 
-    <form method="post">
+    <form method="post" class="pa-4">
         <div class="mb-3">
             <label for="id" class="form-label">Id</label>
             <input type="text" id="id" name="id" class="form-control" value="{{ participant.id }}" required maxlength="9" minlength="9" readonly />
@@ -22,4 +22,33 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 
+
+{% if participant.assessments|length > 0 %}
+
+    <h3 class="mt-4">Assessments</h3>
+
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Date Recorded</td>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for a in participant.assessments %}
+            <tr>
+                <th scope="row">
+                    {{ a.id }}
+                </th>
+                <td>
+                    {{ a.date_recorded }}
+                </td>
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No assessments yet. <a href="/">Add one!</a></p>
+{% endif %}
 {% endblock %}

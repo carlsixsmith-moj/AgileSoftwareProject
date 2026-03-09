@@ -1,5 +1,6 @@
 import sys
 import os
+from datetime import date, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -10,9 +11,7 @@ with app.app_context():
     db.create_all()
     print('Created database schema')
 
-    if Participant.query.first():
-        print("\nParticipants already exist, skipping seeding.")
-    else:
+    if Participant.query.first() is None:
         participants = [
             Participant(id="1CFG1109X", name="Barry Stone"),
             Participant(id="1CFG1333S", name="Peter Allen"),
@@ -49,3 +48,29 @@ with app.app_context():
         print("\nParticipants created")
         for p in participants:
             print(f"    [{p.id}] {p.name}")
+    else:
+        print("\nParticipants already exist, skipping participant seeding.")
+
+    if Assessment.query.first() is None:
+        participants = Participant.query.order_by(Participant.id).all()
+        if not participants:
+            print("\nNo participants available, cannot seed assessments.")
+        else:
+            start_date = date(2026, 1, 6)
+            assessments = []
+
+            # Create 2 assessments for the first 12 participants.
+            for index, participant in enumerate(participants[:12]):
+                first_date = start_date + timedelta(days=index * 7)
+                second_date = first_date + timedelta(days=28)
+                assessments.append(Assessment(participant=participant, date_recorded=first_date))
+                assessments.append(Assessment(participant=participant, date_recorded=second_date))
+
+            db.session.add_all(assessments)
+            db.session.commit()
+
+            print("\nAssessments created")
+            for a in assessments:
+                print(f"    [Assessment {a.id}] participant={a.participant_id}, date={a.date_recorded}")
+    else:
+        print("\nAssessments already exist, skipping assessment seeding.")
