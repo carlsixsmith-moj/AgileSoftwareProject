@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% if assessments %}
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -27,29 +26,31 @@
     <table class="table table-striped ">
         <thead>
             <tr>
-                <td>Id</td>
-                <td>Date Recorded</td>
+                <th>Id</th>
+                <th>Date Recorded</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             {% for a in assessments %}
             <tr>
-                <th scope="row">
+                <td>
                     {{ a.id }}
-                </th>
+                </td>
                 <td>
                     {{ a.date_recorded }}
                 </td>
             </tr>
-            
             {% endfor %}
-        </tbdy>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td rowspan="2">
+                    <a href="{{ url_for('assessments.add_assessment', participantId=participantId)}}">Add Assessment</a>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
-{% else %}
 
-    <p>No assessments found</p>
-
-{% endif %}
 
 {% endblock %}

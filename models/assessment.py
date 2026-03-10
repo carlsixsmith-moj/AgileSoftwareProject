@@ -7,3 +7,9 @@ class Assessment(db.Model):
     date_recorded = db.Column(db.Date, nullable=False)
     participant_id = db.Column(db.String(9), db.ForeignKey('participant.id'), nullable=False)
     participant = db.relationship('Participant', back_populates='assessments')
+    thoughts_and_behaviours = db.relationship(
+        'ThoughtsAndBehaviours',
+        back_populates='assessment',
+        uselist=False,
+        cascade='all, delete-orphan'
+    )

@@ -10,3 +10,10 @@ def list_assessments(participantId):
         abort(404)
 
     return render_template('assessments/list.html', assessments = participant.assessments, participantId = participantId)
+
+@assessments_bp.route('/add')
+def add_assessment(participantId):
+    participant = db.session.get(Participant, participantId)
+    if participant is None:
+        abort(404)
+    return render_template('assessments/add.html', participantId = participant.id)

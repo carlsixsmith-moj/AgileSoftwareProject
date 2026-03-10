@@ -1,5 +1,6 @@
 from .database import db
 from .participant import Participant
 from .assessment import Assessment
+from .thoughts_and_behaviours import ThoughtsAndBehaviours
 
-__all__ = ['db', 'Participant', 'Assessment']
+__all__ = ['db', 'Participant', 'Assessment', 'ThoughtsAndBehaviours']
