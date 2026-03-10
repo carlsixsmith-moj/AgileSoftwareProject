@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if assessments %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url_for('participants.list_participants') }}" >
+                        Participants
+                </a> 
+ 
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ url_for('participants.edit_participant', id = participantId) }}">
+                    {{ participantId }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+               Assessments
+            </li>
+        </ol>
+    </nav>
+
+
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Date Recorded</td>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for a in assessments %}
+            <tr>
+                <th scope="row">
+                    {{ a.id }}
+                </th>
+                <td>
+                    {{ a.date_recorded }}
+                </td>
+            </tr>
+            
+            {% endfor %}
+        </tbdy>
+    </table>
+
+{% else %}
+
+    <p>No assessments found</p>
+
+{% endif %}
+
+{% endblock %}

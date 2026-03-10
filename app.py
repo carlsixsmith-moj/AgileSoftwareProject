@@ -4,9 +4,9 @@ import os
 # add the current directory to the Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 
-from controllers import participants_bp
+from controllers import *
 from models import db
 
 # -- Create the flask application --
@@ -19,6 +19,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # -- initialise the database with the app --
 db.init_app(app)
 app.register_blueprint(participants_bp)
+app.register_blueprint(assessments_bp)
+
+
+@app.route('/')
+def home():
+    return redirect(url_for('participants.list_participants'))
 
 if __name__ == '__main__':
     with app.app_context():

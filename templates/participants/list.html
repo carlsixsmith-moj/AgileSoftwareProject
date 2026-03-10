@@ -2,6 +2,14 @@
 
 {% block content %}
 
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Participants</li>
+    </ol>
+</nav>
+
+
 {% if participants %}
 
 <table class="table table-striped">
@@ -9,6 +17,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>DOB</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -17,6 +26,7 @@
         <tr>
             <td>{{ participant.id }}</td>
             <td>{{ participant.name }}</td>
+            <td>{{ participant.dob }}</td>
             <td>
                 <a href="{{ url_for('participants.edit_participant', id = participant.id) }}" class="btn btn-primary" >
                     Edit
