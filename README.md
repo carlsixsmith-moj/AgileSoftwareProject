@@ -62,7 +62,7 @@ This creates:
 python app.py
 ```
 
-The app starts in debug mode and is available at: `http://localhost:5000`
+The app starts in debug mode and is available at: `http://127.0.0.1:5000`
 
 ---
 
@@ -70,7 +70,7 @@ The app starts in debug mode and is available at: `http://localhost:5000`
 
 ### Logging In
 
-Navigate to `http://localhost:5000` — you will be redirected to the login page. Enter your credentials to continue.
+Navigate to `http://127.0.0.1:5000` — you will be redirected to the login page. Enter your credentials to continue.
 
 ### Participants
 
