@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+ <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('participants.list_participants') }}">
+                Participants
+            </a>
+
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('participants.edit_participant', id = participantId) }}">
+                {{ participantId }}
+            </a>
+        </li>
+        <li class="breadcrumb-item ">
+            <a href="{{ url_for('assessments.list_assessments', participantId = participantId) }}">
+                Assessments
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ assessment.id }}
+        </li> 
+    </ol>
+</nav>
+
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% if assessment %}
+
+        <p>This assessment was recorded: <strong>{{ assessment.date_recorded }}</strong></p>
+
+        {% if assessment.thoughts_and_behaviours %}
+            <p>
+                Total thoughts and behaviours score:
+                <strong>
+                    <span class="badge badge-pill {{assessment.thoughts_and_behaviours.colour()}}">
+                         {{ assessment.thoughts_and_behaviours.score() }}
+                    </span>
+                </strong>
+            </p>
+
+            <p>
+                I tend to bounce back quickly after hard times:  
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.bounce_back }}
+                </strong>
+            </p>
+
+            <p>
+                I often do things without thinking of the consequences:
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.consequences }}
+                </strong>
+            </p>
+
+             <p>
+                I am really working hard to change my life
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.working_hard }}
+                </strong>
+            </p>
+
+             <p>
+                I feel good about myself:
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.feel_good }}
+                </strong>
+            </p>
+
+             <p>
+                I find it easy to adapt to changes in my life:
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.adaptable }}
+                </strong>
+            </p>
+
+             <p>
+                I struggle to understand my own or other people's feelings:
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.feelings }}
+                </strong>
+            </p>
+
+             <p>
+               My emotions can get the better of me:
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.emotional_problems }}
+                </strong>
+            </p>
+
+             <p>
+                I find it easy to talk to other people:
+                <strong>
+                    {{ assessment.thoughts_and_behaviours.easy_to_talk }}
+                </strong>
+            </p>
+           
+        {% endif %}
+
+    {% endif %}
+
+{% endblock %}

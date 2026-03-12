@@ -34,7 +34,9 @@
             {% for a in assessments %}
             <tr>
                 <td>
-                    {{ a.id }}
+                    <a href="{{ url_for('assessments.get_assessment', participantId = participantId, assessmentId = a.id ) }}">
+                        {{ a.id }}
+                    </a>
                 </td>
                 <td>
                     {{ a.date_recorded }}
