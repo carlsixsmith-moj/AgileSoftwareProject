@@ -31,9 +31,11 @@
                 <a href="{{ url_for('participants.edit_participant', id = participant.id) }}" class="btn btn-primary" >
                     Edit
                 </a> 
+                {% if current_user.is_admin %}
                  <a href="{{ url_for('participants.delete_participant', id = participant.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this participant?')">
                     Delete
                 </a> 
+                {% endif %}
 
             </td>
         </tr>

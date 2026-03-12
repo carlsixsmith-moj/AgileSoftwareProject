@@ -1,16 +1,20 @@
 from flask import Blueprint, render_template, request, redirect, url_for, abort
+from flask_login import login_required
 from models import Participant, db
 from datetime import datetime
+from controllers.auth import admin_required
 
 participants_bp = Blueprint('participants', __name__, url_prefix='/participants')
 
 """Index route for the participants controller """
 @participants_bp.route('/')
+@login_required
 def list_participants():
     participants = Participant.query.all()
     return render_template('participants/list.html', participants=participants)
 
 @participants_bp.route('/<string:id>/edit', methods=['GET','POST'])
+@login_required
 def edit_participant(id):
     participant = db.session.get(Participant, id)
 
@@ -36,6 +40,7 @@ def edit_participant(id):
 
 
 @participants_bp.route('/add', methods=['GET', 'POST'])
+@login_required
 def add_participant():
     if request.method == 'POST':
         participant_id = (request.form.get('id') or '').strip()
@@ -68,6 +73,7 @@ def add_participant():
     return render_template('participants/add.html')
 
 @participants_bp.route('/<string:id>/delete')
+@admin_required
 def delete_participant(id):
     participant = db.session.get(Participant, id)
 

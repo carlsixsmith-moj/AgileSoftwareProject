@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, abort
+from flask_login import login_required
 from models import Participant, Assessment, ThoughtsAndBehaviours ,db
 from datetime import datetime
 
@@ -6,6 +7,7 @@ from datetime import datetime
 assessments_bp = Blueprint('assessments', __name__, url_prefix="/participants/<string:participantId>/assessments")
 
 @assessments_bp.route('/')
+@login_required
 def list_assessments(participantId):
     participant = db.session.get(Participant, participantId)
     if participant is None:
@@ -14,6 +16,7 @@ def list_assessments(participantId):
     return render_template('assessments/list.html', assessments = participant.assessments, participantId = participantId)
 
 @assessments_bp.route("/<int:assessmentId>/")
+@login_required
 def get_assessment(participantId, assessmentId):
     assessment = db.session.get(Assessment, assessmentId)
     if assessment.participant_id != participantId:
@@ -23,6 +26,7 @@ def get_assessment(participantId, assessmentId):
 
 
 @assessments_bp.route('/add', methods=['GET','POST'])
+@login_required
 def add_assessment(participantId):
     participant = db.session.get(Participant, participantId)
     if participant is None:

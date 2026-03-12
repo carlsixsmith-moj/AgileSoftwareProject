@@ -5,12 +5,35 @@ from datetime import date, timedelta
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from app import app
-from models import db, Participant, Assessment
+from models import db, Participant, Assessment, User
 
 with app.app_context():
     db.create_all()
     print('Created database schema')
 
+    # Seed default users
+    if User.query.first() is None:
+        admin = User(username='admin', role='admin')
+        admin.set_password('admin')
+
+        user = User(username='user', role='user')
+        user.set_password('user')
+
+        users = [
+            admin,
+            user
+        ]
+
+        db.session.add_all( users )
+        db.session.commit()
+        
+        print("\nUsers created")
+        for u in users:
+            print(f"    [{u.username}] {u.role}")
+    else:
+        print('\nUsers already exist, skipping user seeding.')
+
+    # Seed default participants
     if Participant.query.first() is None:
         default_dob = date(1990, 1, 1)
         participants = [
