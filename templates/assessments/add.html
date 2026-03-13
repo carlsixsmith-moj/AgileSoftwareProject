@@ -27,6 +27,12 @@
     </ol>
 </nav>
 
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endif %}
+
 <form method="post">
     <div class="mb-2">
         <label for="date_recorded" class="form-label">Date Recorded</label>
@@ -42,12 +48,12 @@
             I tend to bounce back quickly after hard times
         </label>
         <select class="form-select" id="bounce_back" name="bounce_back" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_bounce_back %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_bounce_back == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_bounce_back == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_bounce_back == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_bounce_back == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_bounce_back == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -57,12 +63,12 @@
             I often do things without thinking of the consequences
         </label>
         <select class="form-select" id="consequences" name="consequences" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_consequences %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_consequences == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_consequences == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_consequences == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_consequences == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_consequences == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -72,12 +78,12 @@
             I am really working hard to change my life
         </label>
         <select class="form-select" id="working_hard" name="working_hard" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_working_hard %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_working_hard == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_working_hard == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_working_hard == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_working_hard == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_working_hard == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -87,12 +93,12 @@
             I feel good about myself
         </label>
         <select class="form-select" id="feel_good" name="feel_good" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_feel_good %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_feel_good == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_feel_good == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_feel_good == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_feel_good == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_feel_good == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -102,12 +108,12 @@
             I find it easy to adapt to changes in my life
         </label>
         <select class="form-select" id="adaptable" name="adaptable" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_adaptable %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_adaptable == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_adaptable == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_adaptable == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_adaptable == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_adaptable == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -117,12 +123,12 @@
             I struggle to understand my own or other people's feelings
         </label>
         <select class="form-select" id="feelings" name="feelings" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_feelings %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_feelings == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_feelings == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_feelings == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_feelings == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_feelings == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -132,12 +138,12 @@
             My emotions can get the better of me
         </label>
         <select class="form-select" id="emotional_problems" name="emotional_problems" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_emotional_problems %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_emotional_problems == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_emotional_problems == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_emotional_problems == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_emotional_problems == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_emotional_problems == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 
@@ -147,12 +153,12 @@
             I find it easy to talk to other people
         </label>
         <select class="form-select" id="easy_to_talk" name="easy_to_talk" required>
-            <option selected></option>
-            <option value="Strongly Disagree">Strongly Disagree</option>
-            <option value="Disagree">Disagree</option>
-            <option value="Neither">Neither</option>
-            <option value="Agree">Agree</option>
-            <option value="Strongly Agree">Strongly Agree</option>
+            <option value="" {% if not frm_easy_to_talk %}selected{% endif %}></option>
+            <option value="Strongly Disagree" {% if frm_easy_to_talk == 'Strongly Disagree' %}selected{% endif %}>Strongly Disagree</option>
+            <option value="Disagree" {% if frm_easy_to_talk == 'Disagree' %}selected{% endif %}>Disagree</option>
+            <option value="Neither" {% if frm_easy_to_talk == 'Neither' %}selected{% endif %}>Neither</option>
+            <option value="Agree" {% if frm_easy_to_talk == 'Agree' %}selected{% endif %}>Agree</option>
+            <option value="Strongly Agree" {% if frm_easy_to_talk == 'Strongly Agree' %}selected{% endif %}>Strongly Agree</option>
         </select>
     </div>
 

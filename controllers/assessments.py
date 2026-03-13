@@ -62,7 +62,19 @@ def add_assessment(participantId):
             return redirect(url_for('assessments.list_assessments', participantId=participantId))
         except ValueError as e:
             error = str(e)
-            return render_template('assessments/add.html', error=error) 
+            return render_template('assessments/add.html',
+                error=error,
+                participantId=participantId,
+                frm_date_recorded=date_recorded_str,
+                frm_bounce_back=request.form.get('bounce_back'),
+                frm_consequences=request.form.get('consequences'),
+                frm_working_hard=request.form.get('working_hard'),
+                frm_feel_good=request.form.get('feel_good'),
+                frm_adaptable=request.form.get('adaptable'),
+                frm_feelings=request.form.get('feelings'),
+                frm_emotional_problems=request.form.get('emotional_problems'),
+                frm_easy_to_talk=request.form.get('easy_to_talk'),
+            )
 
 
 
