@@ -4,10 +4,11 @@ from datetime import date, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app import app
 from models import db, Participant, Assessment, User
 
-with app.app_context():
+
+def seed_database():
+    """Run within an active app context to create tables and seed initial data."""
     db.create_all()
     print('Created database schema')
 
@@ -74,3 +75,9 @@ with app.app_context():
             print(f"    [{p.id}] {p.name}")
     else:
         print("\nParticipants already exist, skipping participant seeding.")
+
+
+if __name__ == '__main__':
+    from app import app
+    with app.app_context():
+        seed_database()

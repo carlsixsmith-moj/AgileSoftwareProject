@@ -34,13 +34,14 @@ app.register_blueprint(participants_bp)
 app.register_blueprint(assessments_bp)
 app.register_blueprint(auth_bp)
 
+with app.app_context():
+    from seed import seed_database
+    seed_database()
+
 
 @app.route('/')
 def home():
     return redirect(url_for('participants.list_participants'))
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-
     app.run(debug=True)
